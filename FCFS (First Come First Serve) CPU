@@ -1,0 +1,74 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() 
+{
+    int p[4];
+    int at[4];
+    int bt[4];
+    for(int i=0;i<4;i++)
+    {
+        scanf("%d%d%d",&p[i],&at[i],&bt[i]);
+    }
+    int wt[4];
+    for(int i=0;i<4;i++)
+    {
+        for(int j=0;j<4-1-i;j++)
+        {
+            if(at[j]>at[j+1])
+            {
+                int temp=at[j];
+                at[j]=at[j+1];
+                at[j+1]=temp;
+                int temp1=bt[j];
+                bt[j]=bt[j+1];
+                bt[j+1]=temp1;
+                int temp3=p[j];
+                p[j]=p[j+1];
+                p[j+1]=temp3;
+            }
+        }
+    }
+    int sum=0;
+    for(int i=0;i<4;i++)
+    {
+        if(i==0)
+        wt[i]=0;
+        else
+        {
+            sum=sum+bt[i-1];
+            wt[i]=sum-at[i];
+        
+        }
+    }
+    for(int i=0;i<4;i++)
+    {
+        for(int j=0;j<4-1-i;j++)
+        {
+            if(p[j]>p[j+1])
+            {
+                int temp=p[j];
+                p[j]=p[j+1];
+                p[j+1]=temp;
+                int temp1=wt[j];
+                wt[j]=wt[j+1];
+                wt[j+1]=temp1;
+            }
+        }
+    }
+    for(int i=0;i<4;i++)
+    {
+        if(i==3)
+            printf("P%d (WT=%d)",p[i],wt[i]);
+        else
+            printf("P%d (WT=%d), ",p[i],wt[i]);
+    }
+    
+    return 0;
+}
